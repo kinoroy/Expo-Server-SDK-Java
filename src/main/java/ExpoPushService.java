@@ -6,8 +6,9 @@ import java.util.List;
 public interface ExpoPushService {
 
     @POST("push/send")
-    Call<List<Object>> sendNotifications(@Body List<Message> messages);
+    Call<PushTicketResponse> sendNotifications(@Body List<Message> messages);
 
-
+    @POST("push/getReceipts")
+    Call<List<Object>> getReceipts(@Body PushReceiptRequest request); /// TODO Model for body with ids, response
 
 }

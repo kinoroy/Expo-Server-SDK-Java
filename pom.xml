@@ -6,7 +6,7 @@
 
     <groupId>com.kinoroy.expo-push-sdk</groupId>
     <artifactId>expo-push-sdk</artifactId>
-    <version>1.0.0</version>
+    <version>0.1.0</version>
 
     <properties>
         <retrofit.version>2.4.0</retrofit.version>
