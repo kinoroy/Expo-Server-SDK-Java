@@ -1,6 +1,6 @@
 import com.google.gson.annotations.SerializedName;
 
-public enum PushReceiptError {
+public enum PushError {
 
     /**
      * The device cannot receive push notifications anymore and you should stop sending messages to the corresponding Expo push token

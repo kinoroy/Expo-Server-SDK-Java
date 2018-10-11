@@ -35,19 +35,4 @@ public class PushReceipt {
         this.details = details;
     }
 
-    public static final class Details {
-
-        @SerializedName("error")
-        private PushReceiptError error;
-
-        public PushReceiptError getError() {
-            return error;
-        }
-
-        public void setError(PushReceiptError error) {
-            this.error = error;
-        }
-
-    }
-
 }

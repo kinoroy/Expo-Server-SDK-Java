@@ -11,6 +11,12 @@ public class PushTicket {
     @SerializedName("id")
     private String id;
 
+    @SerializedName("message")
+    private String message;
+
+    @SerializedName("details")
+    private Details details;
+
     public Status getStatus() {
         return status;
     }
@@ -27,4 +33,19 @@ public class PushTicket {
         this.id = id;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Details getDetails() {
+        return details;
+    }
+
+    public void setDetails(Details details) {
+        this.details = details;
+    }
 }
