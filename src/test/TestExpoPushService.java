@@ -1,3 +1,4 @@
+import com.google.gson.GsonBuilder;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.After;
@@ -40,6 +41,8 @@ public class TestExpoPushService {
                 .setBody(readFromFile(filename));
         mockServer.enqueue(response);
         PushTicketResponse res = service.sendNotifications(new ArrayList<Message>()).execute().body();
+        assertNull(res.getErrors());
+
         assertTrue(res.getTickets().size() == 2);
 
         PushTicket t1 = res.getTickets().get(0);
@@ -51,6 +54,53 @@ public class TestExpoPushService {
         assertNotNull(t2);
         assertTrue(t2.getId().equals("YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY"));
         assertTrue(t2.getStatus().equals(Status.OK));
+    }
+
+    @Test
+    public void testSendNotificationsSomeSucc() throws Exception {
+        String filename = "sendNotifResponseSomeSucc.json";
+        MockResponse response = new MockResponse()
+                .setResponseCode(200)
+                .setHeader("content-type", "application/json")
+                .setBody(readFromFile(filename));
+        mockServer.enqueue(response);
+        PushTicketResponse res = service.sendNotifications(new ArrayList<Message>()).execute().body();
+        assertNull(res.getErrors());
+
+        PushTicket t1 = res.getTickets().get(0);
+        assertNotNull(t1);
+        assertEquals(t1.getStatus(), Status.ERROR);
+        assertEquals(t1.getMessage(), "\"ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]\" is not a registered push notification recipient");
+        assertNull(t1.getId());
+        assertNotNull(t1.getDetails());
+        assertEquals(t1.getDetails().getError(), PushError.DEVICE_NOT_REGISTERED);
+
+        PushTicket t2 = res.getTickets().get(1);
+        assertNotNull(t2);
+        assertEquals(t2.getStatus(), Status.OK);
+        assertNull(t2.getMessage());
+        assertNull(t2.getDetails());
+        assertEquals(t2.getId(), "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
+
+    }
+
+    @Test
+    public void testSendNotificationsRequestError() throws Exception {
+        String filename = "sendNotifResponseRequestError.json";
+
+        MockResponse response = new MockResponse()
+                .setResponseCode(500)
+                .setHeader("content-type", "application/json")
+                .setBody(readFromFile(filename));
+        mockServer.enqueue(response);
+        String eBody = service.sendNotifications(new ArrayList<Message>()).execute().errorBody().string();
+        PushTicketResponse res = new GsonBuilder().create().fromJson(eBody, PushTicketResponse.class);
+
+        assertNotNull(res.getErrors());
+        assertEquals(res.getErrors().size(), 1);
+        assertEquals(res.getErrors().get(0).getCode(), "INTERNAL_SERVER_ERROR");
+        assertEquals(res.getErrors().get(0).getMessage(), "An unknown error occurred.");
+
     }
 
     @After
