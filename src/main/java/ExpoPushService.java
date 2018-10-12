@@ -9,6 +9,6 @@ public interface ExpoPushService {
     Call<PushTicketResponse> sendNotifications(@Body List<Message> messages);
 
     @POST("push/getReceipts")
-    Call<List<Object>> getReceipts(@Body PushReceiptRequest request); /// TODO Model for body with ids, response
+    Call<PushReceiptResponse> getReceipts(@Body PushReceiptRequest request);
 
 }

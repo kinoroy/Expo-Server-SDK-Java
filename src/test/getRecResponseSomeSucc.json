@@ -1,0 +1,14 @@
+{
+  "data": {
+    "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX": {
+      "status": "error",
+      "message": "The Apple Push Notification service failed to send the notification",
+      "details": {
+        "error": "DeviceNotRegistered"
+      }
+    },
+    "YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY": {
+      "status": "ok"
+    }
+  }
+}

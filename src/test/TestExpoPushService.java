@@ -103,6 +103,33 @@ public class TestExpoPushService {
 
     }
 
+    @Test
+    public void testGetRecResponseSomeSucc() throws Exception {
+        String filename = "getRecResponseSomeSucc.json";
+        MockResponse response = new MockResponse()
+                .setResponseCode(200)
+                .setHeader("content-type", "application/json")
+                .setBody(readFromFile(filename));
+        mockServer.enqueue(response);
+        PushReceiptResponse res = service.getReceipts(new PushReceiptRequest()).execute().body();
+
+        assertNotNull(res.getReceipts());
+        assertEquals(res.getReceipts().size(), 2);
+
+        PushReceipt r1 = res.getReceipts().get("XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
+        assertNotNull(r1);
+        assertEquals(r1.getStatus(), Status.ERROR);
+        assertEquals(r1.getMessage(), "The Apple Push Notification service failed to send the notification");
+        assertNotNull(r1.getDetails());
+        assertEquals(r1.getDetails().getError(), PushError.DEVICE_NOT_REGISTERED);
+
+        PushReceipt r2 = res.getReceipts().get("YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY");
+        assertNotNull(r2);
+        assertEquals(r2.getStatus(), Status.OK);
+        assertNull(r2.getMessage());
+        assertNull(r2.getDetails());
+    }
+
     @After
     public void tearDown() throws Exception {
         mockServer.shutdown();
