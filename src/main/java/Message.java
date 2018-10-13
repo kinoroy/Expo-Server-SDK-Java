@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.HashMap;
 
 public class Message {
 
@@ -11,7 +12,7 @@ public class Message {
      * A dict of extra data to pass inside of the push notification.
      * The total notification payload must be at most 4096 bytes.
      */
-    private Object data;
+    private HashMap<String, Object> data;
 
     /**
      * The title to display in the notification. On iOS, this is
@@ -75,7 +76,7 @@ public class Message {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(HashMap<String, Object> data) {
         this.data = data;
     }
 
@@ -142,4 +143,5 @@ public class Message {
     public void setChannelId(Long channelId) {
         this.channelId = channelId;
     }
+
 }

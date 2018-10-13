@@ -23,7 +23,6 @@ public class TestExpoPushService {
     public void setUp() throws Exception{
         mockServer = new MockWebServer();
         mockServer.start();
-        //String BASE_URL = "https://5gla4b9oy2.execute-api.ca-central-1.amazonaws.com/Test/"; // "https://exp.host/--/api/v2/"";
         String BASE_URL = mockServer.url("/").toString();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
