@@ -1,3 +1,5 @@
+package com.kinoroy.expo.push;
+
 import java.util.regex.Pattern;
 
 public class PushToken {

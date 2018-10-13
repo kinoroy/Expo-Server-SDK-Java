@@ -1,3 +1,5 @@
+package com.kinoroy.expo.push;
+
 import com.google.gson.annotations.SerializedName;
 
 public enum Priority {

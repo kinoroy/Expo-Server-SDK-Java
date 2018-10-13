@@ -1,6 +1,6 @@
+package com.kinoroy.expo.push;
+
 import com.google.gson.GsonBuilder;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -44,7 +44,7 @@ public class ExpoPushClient {
 
     public static PushTicketResponse sendPushNotifications(List<Message> messages) throws IOException {
         if(messages.size() > 100) {
-            throw new IllegalArgumentException("More than 100 messages cannot be sent at once. Use ExpoPushClient.chunkItems()");
+            throw new IllegalArgumentException("More than 100 messages cannot be sent at once. Use com.kinoroy.expo.push.ExpoPushClient.chunkItems()");
         }
         Call<PushTicketResponse> call = service.sendNotifications(messages);
         Response<PushTicketResponse> response = call.execute();
@@ -59,7 +59,7 @@ public class ExpoPushClient {
 
     public static PushReceiptResponse getPushReciepts(List<String> ids) throws IOException {
         if(ids.size() > 100) {
-            throw new IllegalArgumentException("More than 100 receipts cannot be retrieved at once. Use ExpoPushClient.chunkItems()");
+            throw new IllegalArgumentException("More than 100 receipts cannot be retrieved at once. Use com.kinoroy.expo.push.ExpoPushClient.chunkItems()");
         }
         PushReceiptRequest request = new PushReceiptRequest();
         request.setIds(ids);

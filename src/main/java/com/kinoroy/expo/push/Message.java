@@ -1,3 +1,5 @@
+package com.kinoroy.expo.push;
+
 import java.util.Date;
 import java.util.HashMap;
 
