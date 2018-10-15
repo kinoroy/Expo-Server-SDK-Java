@@ -45,16 +45,21 @@ public class ExpoPushClient {
     }
 
     /**
-     *
-     * @param messages A list of message objects to be sent to Expo.
-     *                 There must not be more than 100 items in this list,
-     *                 otherwise IllegalArgumentException will be thrown
+     * Sends a list of messages to Expo to be forwarded to APNS or Google Cloud Messaging.
+     * Attempting to send more than 100 messages at once will result in
+     * an IllegalArgumentException. Use ExpoPushClient.chunkItems(messages) to create
+     * lists of acceptable size.
+     * <p>
+     * It's recommended to check whether your push tokens are syntactically valid before
+     * sending by using <code>ExpoPushClient.isExpoPushToken(token)</code> on each token.
+     * @param messages A list of up to 100 message objects to be sent to Expo.
      * @return  The response from Expo's server with a list of PushTickets and a list of PushErrors if any
      * @throws IOException If there was an error with sending the HTTP POST request to Expo's servers
      */
     public static PushTicketResponse sendPushNotifications(List<Message> messages) throws IOException {
         if(messages.size() > 100) {
-            throw new IllegalArgumentException("More than 100 messages cannot be sent at once. Use com.kinoroy.expo.push.ExpoPushClient.chunkItems()");
+            throw new IllegalArgumentException("More than 100 messages cannot be sent at once." +
+                    " Use ExpoPushClient.chunkItems(messages)");
         }
         Call<PushTicketResponse> call = service.sendNotifications(messages);
         Response<PushTicketResponse> response = call.execute();
@@ -68,7 +73,9 @@ public class ExpoPushClient {
     }
 
     /**
-     *
+     * Retrieves push receipts from Expo.
+     * <p>
+     * Once Expo delivers a notification to the iOS or Android push notification service, Expo creates a push receipt
      * @param ids A list of ids retrieved from PushTickets.
      *            There must not be more than 100 items in this list,
      *            otherwise IllegalArgumentException will be thrown
@@ -77,16 +84,17 @@ public class ExpoPushClient {
      */
     public static PushReceiptResponse getPushReciepts(List<String> ids) throws IOException {
         if(ids.size() > 100) {
-            throw new IllegalArgumentException("More than 100 receipts cannot be retrieved at once. Use com.kinoroy.expo.push.ExpoPushClient.chunkItems()");
+            throw new IllegalArgumentException("More than 100 receipts cannot be retrieved at once." +
+                    " Use ExpoPushClient.chunkItems(ids)");
         }
-        PushReceiptRequest request = new PushReceiptRequest();
+        var request = new PushReceiptRequest();
         request.setIds(ids);
         Call<PushReceiptResponse> call = service.getReceipts(request);
         Response<PushReceiptResponse> response = call.execute();
         if (response.isSuccessful()) {
             return response.body();
         } else {
-            String eBody = response.errorBody().string();
+            var eBody = response.errorBody().string();
             PushReceiptResponse eResponse = new GsonBuilder().create().fromJson(eBody, PushReceiptResponse.class);
             return eResponse;
         }
