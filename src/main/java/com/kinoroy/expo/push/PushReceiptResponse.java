@@ -9,11 +9,10 @@ public class PushReceiptResponse {
     @SerializedName("data")
     private Map<String, PushReceipt> receipts;
 
+    private PushReceiptResponse() {}
+
     public Map<String, PushReceipt> getReceipts() {
         return receipts;
     }
 
-    public void setReceipts(Map<String, PushReceipt> receipts) {
-        this.receipts = receipts;
-    }
 }

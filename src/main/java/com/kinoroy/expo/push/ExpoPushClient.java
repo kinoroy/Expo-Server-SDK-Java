@@ -22,6 +22,8 @@ public class ExpoPushClient {
     private static final ExpoPushService service = retrofit
             .create(ExpoPushService.class);
 
+    private ExpoPushClient() {}
+
     public static String getBaseUrl() {
         return BASE_URL;
     }
@@ -42,6 +44,14 @@ public class ExpoPushClient {
         return valid;
     }
 
+    /**
+     *
+     * @param messages A list of message objects to be sent to Expo.
+     *                 There must not be more than 100 items in this list,
+     *                 otherwise IllegalArgumentException will be thrown
+     * @return  The response from Expo's server with a list of PushTickets and a list of PushErrors if any
+     * @throws IOException If there was an error with sending the HTTP POST request to Expo's servers
+     */
     public static PushTicketResponse sendPushNotifications(List<Message> messages) throws IOException {
         if(messages.size() > 100) {
             throw new IllegalArgumentException("More than 100 messages cannot be sent at once. Use com.kinoroy.expo.push.ExpoPushClient.chunkItems()");
@@ -57,6 +67,14 @@ public class ExpoPushClient {
         }
     }
 
+    /**
+     *
+     * @param ids A list of ids retrieved from PushTickets.
+     *            There must not be more than 100 items in this list,
+     *            otherwise IllegalArgumentException will be thrown
+     * @return The response from Expo's servers with a map of PushReceipts
+     * @throws IOException If there was an error with sending the HTTP POST request to Expo's servers
+     */
     public static PushReceiptResponse getPushReciepts(List<String> ids) throws IOException {
         if(ids.size() > 100) {
             throw new IllegalArgumentException("More than 100 receipts cannot be retrieved at once. Use com.kinoroy.expo.push.ExpoPushClient.chunkItems()");
@@ -74,6 +92,13 @@ public class ExpoPushClient {
         }
     }
 
+    /**
+     * Takes a list of items and returns a list of lists, where each list is no more than 100 items in size.
+     * This is a requirement of Expo's servers.
+     * @param items A list of items to chunk
+     * @param <T> The type of the item. Either Message for messages or String for ids.
+     * @return A list of lists, each of which is no more than 100 items in size.
+     */
     public static <T> List<List<T>> chunkItems(List<T> items) {
         List<List<T>> chunks = new ArrayList<>();
         int numChunks = (int)Math.ceil(items.size() / 100);

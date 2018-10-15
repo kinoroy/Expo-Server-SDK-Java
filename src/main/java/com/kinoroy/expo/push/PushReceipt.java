@@ -17,24 +17,12 @@ public class PushReceipt {
         return status;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public Details getDetails() {
         return details;
-    }
-
-    public void setDetails(Details details) {
-        this.details = details;
     }
 
 }

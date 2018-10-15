@@ -7,12 +7,10 @@ public class Details {
     @SerializedName("error")
     private PushError error;
 
+    private Details() {}
+
     public PushError getError() {
         return error;
-    }
-
-    public void setError(PushError error) {
-        this.error = error;
     }
 
 }

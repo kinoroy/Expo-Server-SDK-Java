@@ -16,19 +16,14 @@ public class PushTicketResponse {
     @SerializedName("errors")
     private List<ExpoError> errors;
 
+    private PushTicketResponse() {}
+
     public List<PushTicket> getTickets() {
         return tickets;
-    }
-
-    public void setTickets(List<PushTicket> tickets) {
-        this.tickets = tickets;
     }
 
     public List<ExpoError> getErrors() {
         return errors;
     }
 
-    public void setErrors(List<ExpoError> errors) {
-        this.errors = errors;
-    }
 }
