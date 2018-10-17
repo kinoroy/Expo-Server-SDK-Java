@@ -1,3 +1,5 @@
+package com.kinoroy.expo.push;
+
 import com.google.gson.GsonBuilder;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
