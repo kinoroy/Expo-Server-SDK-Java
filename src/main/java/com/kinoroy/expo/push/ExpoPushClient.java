@@ -31,18 +31,12 @@ public class ExpoPushClient {
 
     private ExpoPushClient() {}
 
-    public static String getBaseUrl() {
-        return BASE_URL;
-    }
-
-    public static Retrofit getRetrofit() {
-        return retrofit;
-    }
-
-    public static ExpoPushService getService() {
-        return service;
-    }
-
+    /**
+     * Determines if a given string appears to be a valid Expo push token
+     * This only checks the structure of the string and does not verify with Expo's servers
+     * whether or not the token is registered/revoked/etc.
+     * @param token
+     */
     public static boolean isExpoPushToken(String token) {
         boolean valid = (token.startsWith("ExponentPushToken[") ||
                 token.startsWith("ExpoPushToken[")) &&

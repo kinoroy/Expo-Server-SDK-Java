@@ -15,7 +15,8 @@ public enum PushError {
     @SerializedName("MessageTooBig")
     MESSAGE_TOO_BIG,
     /**
-     * You are sending messages too frequently to the given device. Implement exponential backoff and slowly retry sending messages.
+     * You are sending messages too frequently to the given device.
+     * Implement exponential backoff and slowly retry sending messages.
      */
     @SerializedName("MessageRateExceeded")
     MESSAGE_RATE_EXCEEDED,
