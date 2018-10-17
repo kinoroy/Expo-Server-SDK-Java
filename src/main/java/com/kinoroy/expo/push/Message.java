@@ -4,6 +4,9 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
 
+/**
+ * Represents a notification to be sent to an individual device
+ */
 public final class Message {
 
     private String to;
@@ -109,6 +112,9 @@ public final class Message {
         return channelId;
     }
 
+    /**
+     * A class to help contruct messages
+     */
     public static class Builder {
 
         private String to;

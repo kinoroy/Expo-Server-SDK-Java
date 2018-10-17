@@ -15,6 +15,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * A client for sending push notifications to Expo
+ */
 public class ExpoPushClient {
 
     private static final Pattern TOKEN_PATTERN = Pattern.compile("^[a-z\\d]{8}-[a-z\\d]{4}-[a-z\\d]{4}-[a-z\\d]{4}-[a-z\\d]{12}$");

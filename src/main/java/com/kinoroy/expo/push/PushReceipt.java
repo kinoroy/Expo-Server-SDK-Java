@@ -2,6 +2,9 @@ package com.kinoroy.expo.push;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Represents a push receipt retrieved from Expo's servers
+ */
 public class PushReceipt {
 
     @SerializedName("status")

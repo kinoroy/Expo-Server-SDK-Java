@@ -2,6 +2,9 @@ package com.kinoroy.expo.push;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Represents an error that Expo encountered with satisfying an entire request to their server
+ */
 public class ExpoError {
 
     @SerializedName("code")

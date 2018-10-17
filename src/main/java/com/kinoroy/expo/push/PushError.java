@@ -2,6 +2,9 @@ package com.kinoroy.expo.push;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Represents an error that Expo encountered while processing an individual message
+ */
 public enum PushError {
 
     /**

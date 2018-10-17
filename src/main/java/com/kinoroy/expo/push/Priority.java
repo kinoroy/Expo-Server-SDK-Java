@@ -2,6 +2,9 @@ package com.kinoroy.expo.push;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Represents the priority to be considered when delivering an individual message
+ */
 public enum Priority {
 
     /**

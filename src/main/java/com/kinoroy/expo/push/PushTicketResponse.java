@@ -9,19 +9,23 @@ public class PushTicketResponse {
     @SerializedName("data")
     private List<PushTicket> tickets;
 
-    /**
-     *  If there is an error with the entire request, the HTTP status code will be 4xx or 5xx,
-     *  and errors will be an array of error objects (usually just one):
-     */
+
     @SerializedName("errors")
     private List<ExpoError> errors;
 
     private PushTicketResponse() {}
 
+    /**
+     * @return A list of push tickets each of which corresponds to the message at its respective index in the request
+     */
     public List<PushTicket> getTickets() {
         return tickets;
     }
 
+    /**
+     *  @return A list of errors (usually just one) if there is an error with the entire request. If not, then null
+     *
+     */
     public List<ExpoError> getErrors() {
         return errors;
     }
