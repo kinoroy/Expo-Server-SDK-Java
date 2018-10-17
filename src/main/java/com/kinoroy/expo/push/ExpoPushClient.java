@@ -39,7 +39,7 @@ public class ExpoPushClient {
     public static boolean isExpoPushToken(String token) {
         boolean valid = (token.startsWith("ExponentPushToken[") ||
                 token.startsWith("ExpoPushToken[")) &&
-                token.endsWith("]") &&
+                token.endsWith("]") ||
                 TOKEN_PATTERN.matcher(token).find();
         return valid;
     }
@@ -87,14 +87,14 @@ public class ExpoPushClient {
             throw new IllegalArgumentException("More than 100 receipts cannot be retrieved at once." +
                     " Use ExpoPushClient.chunkItems(ids)");
         }
-        var request = new PushReceiptRequest();
+        PushReceiptRequest request = new PushReceiptRequest();
         request.setIds(ids);
         Call<PushReceiptResponse> call = service.getReceipts(request);
         Response<PushReceiptResponse> response = call.execute();
         if (response.isSuccessful()) {
             return response.body();
         } else {
-            var eBody = response.errorBody().string();
+            String eBody = response.errorBody().string();
             PushReceiptResponse eResponse = new GsonBuilder().create().fromJson(eBody, PushReceiptResponse.class);
             return eResponse;
         }
