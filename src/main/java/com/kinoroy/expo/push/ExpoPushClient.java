@@ -1,5 +1,6 @@
 package com.kinoroy.expo.push;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -7,7 +8,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -15,9 +19,12 @@ public class ExpoPushClient {
 
     private static final Pattern TOKEN_PATTERN = Pattern.compile("^[a-z\\d]{8}-[a-z\\d]{4}-[a-z\\d]{4}-[a-z\\d]{4}-[a-z\\d]{12}$");
     private static final String BASE_URL = "https://exp.host/--/api/v2/";
+    private static final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(Instant.class, new InstantAdapter())
+            .registerTypeAdapter(Duration.class, new DurationAdapter()).create();
     private static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
     private static final ExpoPushService service = retrofit
             .create(ExpoPushService.class);

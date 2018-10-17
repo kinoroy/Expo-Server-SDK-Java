@@ -14,7 +14,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.net.URL;
+import java.sql.Date;
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
+import static com.kinoroy.expo.push.Util.*;
 
 public class TestExpoPushService {
 
@@ -129,34 +133,12 @@ public class TestExpoPushService {
         assertEquals(r2.getStatus(), Status.OK);
         assertNull(r2.getMessage());
         assertNull(r2.getDetails());
+
     }
 
-    @After
+
     public void tearDown() throws Exception {
         mockServer.shutdown();
-    }
-
-    private String readFromFile(String fileName) throws Exception {
-
-        // Credit: https://www.journaldev.com/875/java-read-file-to-string
-        URL path = TestExpoPushService.class.getResource(fileName);
-        File f = new File(path.getFile());
-        BufferedReader reader = new BufferedReader(new FileReader(f));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line = null;
-        String ls = System.getProperty("line.separator");
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-            stringBuilder.append(ls);
-        }
-        // delete the last new line separator
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        reader.close();
-
-        String content = stringBuilder.toString();
-
-        return content;
-
     }
 
 }

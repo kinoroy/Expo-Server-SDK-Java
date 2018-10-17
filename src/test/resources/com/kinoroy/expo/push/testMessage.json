@@ -1,0 +1,19 @@
+{
+  "to": "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+
+  "title": "Test",
+
+  "body": "This is only a test",
+
+  "ttl": 86400,
+
+  "expiration": 1540145105,
+
+  "priority": "default",
+
+  "sound": "mySound.wav",
+
+  "badge": 11,
+
+  "channelId": "abc"
+}

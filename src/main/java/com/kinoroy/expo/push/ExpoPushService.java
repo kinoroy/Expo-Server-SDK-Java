@@ -5,7 +5,7 @@ import retrofit2.http.*;
 
 import java.util.List;
 
-public interface ExpoPushService {
+interface ExpoPushService {
 
     @POST("push/send")
     Call<PushTicketResponse> sendNotifications(@Body List<Message> messages);

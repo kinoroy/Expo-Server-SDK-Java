@@ -1,262 +1,223 @@
 package com.kinoroy.expo.push;
 
-import java.util.Date;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.HashMap;
 
 public final class Message {
 
-    /**
-     * A token of the form ExponentPushToken[xxxxxxx]
-     */
     private String to;
 
-    /**
-     * A dict of extra data to pass inside of the push notification.
-     * The total notification payload must be at most 4096 bytes.
-     */
     private HashMap<String, Object> data;
 
-    /**
-     * The title to display in the notification. On iOS, this is
-     * displayed only on Apple Watch.
-     */
     private String title;
 
-    /**
-     * The message to display in the notification.
-     */
     private String body;
 
-    /**
-     * A sound to play when the recipient receives this
-     * notification. Specify "default" to play the device's default
-     * notification sound, or omit this field to play no sound.
-     * iOS specific.
-     */
     private String sound = "default";
 
-    /**
-     * The number of seconds for which the message may be kept around
-     * for redelivery if it hasn't been delivered yet. Defaults to 0.
-     */
-    private Long ttl;
+    private Duration ttl;
 
-    /**
-     * UNIX timestamp for when this message expires. It has
-     * the same effect as ttl, and is just an absolute timestamp
-     * instead of a relative one.
-     */
-    private Date expiration;
+    private Instant expiration;
 
-    /**
-     * Delivery priority of the message. 'default', 'normal',
-     * and 'high' are the only valid values.
-     */
     private Priority priority;
 
-    /**
-     * An integer representing the unread notification count. This
-     * currently only affects iOS. Specify 0 to clear the badge count.
-     */
     private Integer badge;
 
-    /**
-     * ID of the Notification Channel through which to display
-     * this notification on Android devices.
-     */
-    private Long channelId;
+    private String channelId;
 
     private Message() {}
 
+    /**
+     * @return A token of the form ExponentPushToken[xxxxxxx]
+     */
     public String getTo() {
         return to;
     }
 
+    /**
+     * @return A dict of extra data to pass inside of the push notification.
+     * The total notification payload must be at most 4096 bytes.
+     */
     public Object getData() {
         return data;
     }
 
+    /**
+     * @return The title to display in the notification. On iOS, this is
+     * displayed only on Apple Watch.
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * @return The message to display in the notification.
+     */
     public String getBody() {
         return body;
     }
 
+    /**
+     * @return A sound to play when the recipient receives this
+     * notification. Specify "default" to play the device's default
+     * notification sound, or omit this field to play no sound.
+     * iOS specific.
+     */
     public String getSound() {
         return sound;
     }
 
-    public Long getTtl() {
+    /**
+     * @return The amount of time for which the message may be kept around
+     * for redelivery if it hasn't been delivered yet. Defaults to 0.
+     */
+    public Duration getTtl() {
         return ttl;
     }
 
-    public Date getExpiration() {
+    /**
+     * @return Date for when this message expires. It has
+     * the same effect as ttl, and is just an absolute date
+     * instead of a relative timestamp.
+     */
+    public Instant getExpiration() {
         return expiration;
     }
 
+    /**
+     * @return Delivery priority of the message. 'default', 'normal',
+     * and 'high' are the only valid values.
+     */
     public Priority getPriority() {
         return priority;
     }
 
+    /**
+     * @return A non-negative integer representing the unread notification count. This
+     * currently only affects iOS. 0 will clear the badge count.
+     */
     public Integer getBadge() {
         return badge;
     }
 
-    public Long getChannelId() {
+    /**
+     * @return The ID of the Notification Channel through which to display
+     * this notification on Android devices.
+     */
+    public String getChannelId() {
         return channelId;
     }
 
     public static class Builder {
 
-        /**
-         * A token of the form ExponentPushToken[xxxxxxx]
-         */
         private String to;
 
-        /**
-         * A dict of extra data to pass inside of the push notification.
-         * The total notification payload must be at most 4096 bytes.
-         */
         private HashMap<String, Object> data;
 
-        /**
-         * The title to display in the notification. On iOS, this is
-         * displayed only on Apple Watch.
-         */
         private String title;
 
-        /**
-         * The message to display in the notification.
-         */
         private String body;
 
-        /**
-         * A sound to play when the recipient receives this
-         * notification. Specify "default" to play the device's default
-         * notification sound, or omit this field to play no sound.
-         * iOS specific.
-         */
         private String sound = "default";
 
-        /**
-         * The number of seconds for which the message may be kept around
-         * for redelivery if it hasn't been delivered yet. Defaults to 0.
-         */
-        private Long ttl;
+        private Duration ttl;
 
-        /**
-         * UNIX timestamp for when this message expires. It has
-         * the same effect as ttl, and is just an absolute timestamp
-         * instead of a relative one.
-         */
-        private Date expiration;
+        private Instant expiration;
 
-        /**
-         * Delivery priority of the message. 'default', 'normal',
-         * and 'high' are the only valid values.
-         */
         private Priority priority;
 
-        /**
-         * An integer representing the unread notification count. This
-         * currently only affects iOS. Specify 0 to clear the badge count.
-         */
         private Integer badge;
 
+        private String channelId;
+
         /**
-         * ID of the Notification Channel through which to display
-         * this notification on Android devices.
+         * @param to A token of the form ExponentPushToken[xxxxxxx]
          */
-        private Long channelId;
-
-        public String getTo() {
-            return to;
-        }
-
         public Builder to(String to) {
             this.to = to;
             return this;
         }
 
-        public Object getData() {
-            return data;
-        }
-
+        /**
+         * @param data A dict of extra data to pass inside of the push notification.
+         * The total notification payload must be at most 4096 bytes.
+         */
         public Builder data(HashMap<String, Object> data) {
             this.data = data;
             return this;
         }
 
-        public String getTitle() {
-            return title;
-        }
-
+        /**
+         * @param title The title to display in the notification. On iOS, this is
+         * displayed only on Apple Watch.
+         */
         public Builder title(String title) {
             this.title = title;
             return this;
         }
 
-        public String getBody() {
-            return body;
-        }
-
+        /**
+         * @param body The message to display in the notification.
+         */
         public Builder body(String body) {
             this.body = body;
             return this;
         }
 
-        public String getSound() {
-            return sound;
-        }
-
+        /**
+         * @param sound A sound to play when the recipient receives this
+         * notification. Specify "default" to play the device's default
+         * notification sound, or omit this field to play no sound.
+         * iOS specific.
+         */
         public Builder sound(String sound) {
             this.sound = sound;
             return this;
         }
 
-        public Long getTtl() {
-            return ttl;
-        }
-
-        public Builder ttl(Long ttl) {
+        /**
+         * @param ttl The number of seconds for which the message may be kept around
+         * for redelivery if it hasn't been delivered yet. Defaults to 0.
+         */
+        public Builder ttl(Duration ttl) {
             this.ttl = ttl;
             return this;
         }
 
-        public Date getExpiration() {
-            return expiration;
-        }
-
-        public Builder expiration(Date expiration) {
+        /**
+         * @param expiration Date for when this message expires. It has
+         * the same effect as ttl, and is just an absolute date
+         * instead of a relative timestamp.
+         */
+        public Builder expiration(Instant expiration) {
             this.expiration = expiration;
             return this;
         }
 
-        public Priority getPriority() {
-            return priority;
-        }
-
+        /**
+         * @param priority Delivery priority of the message. 'default', 'normal',
+         * and 'high' are the only valid values.
+         */
         public Builder priority(Priority priority) {
             this.priority = priority;
             return this;
         }
 
-        public Integer getBadge() {
-            return badge;
-        }
-
+        /**
+         * @param badge A non-negative integer representing the unread notification count. This
+         * currently only affects iOS. 0 will clear the badge count.
+         */
         public Builder badge(Integer badge) {
             this.badge = badge;
             return this;
         }
 
-        public Long getChannelId() {
-            return channelId;
-        }
-
-        public Builder channelId(Long channelId) {
+        /**
+         * @param channelId The ID of the Notification Channel through which to display
+         * this notification on Android devices.
+         */
+        public Builder channelId(String channelId) {
             this.channelId = channelId;
             return this;
         }
@@ -272,7 +233,7 @@ public final class Message {
             message.title = title;
             message.body = body;
             message.sound = sound;
-            if (ttl < 0) {
+            if (ttl.isNegative()) {
                 throw new IllegalStateException("\"ttl\" cannot be negative");
             }
             message.ttl = ttl;
@@ -282,6 +243,7 @@ public final class Message {
                 throw new IllegalStateException("\"badge\" cannot be negative");
             }
             message.badge = badge;
+            message.channelId = channelId;
 
             return message;
         }
