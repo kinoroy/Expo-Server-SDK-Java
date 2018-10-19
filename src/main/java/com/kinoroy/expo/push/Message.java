@@ -245,7 +245,7 @@ public final class Message {
             message.ttl = ttl;
             message.expiration = expiration;
             message.priority = priority;
-            if (badge < 0) {
+            if (badge != null && badge < 0) {
                 throw new IllegalStateException("\"badge\" cannot be negative");
             }
             message.badge = badge;
