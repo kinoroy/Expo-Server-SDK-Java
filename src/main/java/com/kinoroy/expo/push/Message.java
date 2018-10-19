@@ -239,7 +239,7 @@ public final class Message {
             message.title = title;
             message.body = body;
             message.sound = sound;
-            if (ttl.isNegative()) {
+            if (ttl != null && ttl.isNegative()) {
                 throw new IllegalStateException("\"ttl\" cannot be negative");
             }
             message.ttl = ttl;

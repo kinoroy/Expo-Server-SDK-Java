@@ -6,7 +6,7 @@
 
     <groupId>com.kinoroy.expo.push</groupId>
     <artifactId>expo-push-sdk</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
 
     <name>Expo Push SDK</name>
     <description>Server-side library for working with Expo using Java</description>
