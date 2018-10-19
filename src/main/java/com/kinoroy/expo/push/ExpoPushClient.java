@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -113,11 +114,25 @@ public class ExpoPushClient {
      */
     public static <T> List<List<T>> chunkItems(List<T> items) {
         List<List<T>> chunks = new ArrayList<>();
-        int numChunks = (int)Math.ceil(items.size() / 100);
+        int numChunks = (int) (Math.ceil((float) items.size() / 100));
         for (int i = 0; i < numChunks; i++) {
-            List<T> chunk = items.subList(i*100, (i+1)*100);
+            List<T> chunk = safeSubList(items, i*100, (i+1)*100);
             chunks.add(chunk);
         }
         return chunks;
     }
+
+    // Thanks to Haroldo_OK
+    private static <T> List<T> safeSubList(List<T> list, int fromIndex, int toIndex) {
+        int size = list.size();
+        if (fromIndex >= size || toIndex <= 0 || fromIndex >= toIndex) {
+            return Collections.emptyList();
+        }
+
+        fromIndex = Math.max(0, fromIndex);
+        toIndex = Math.min(size, toIndex);
+
+        return list.subList(fromIndex, toIndex);
+    }
+
 }
