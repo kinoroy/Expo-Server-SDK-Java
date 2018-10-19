@@ -1,5 +1,5 @@
 
-# Expo Server SDK (Java)
+# Expo Server SDK (Java) [![Maven Central](https://img.shields.io/maven-central/v/com.kinoroy.expo.push/expo-push-sdk.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.kinoroy.expo.push%22%20AND%20a:%22expo-push-sdk%22)
 Server side library for working with Expo using Java.
 (This project is not affiliated with Expo)
 
