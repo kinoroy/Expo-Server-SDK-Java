@@ -91,7 +91,7 @@ public class Main {
             List<PushReceipt> receipts = response.getReceipts();
             for (String id : ids) {
                 PushReceipt rec = receipts.get(id);
-                if (id != null) {
+                if (rec != null) {
                     if (rec.getStatus() == Status.OK) {
                         // It's all good!
                     } else {
