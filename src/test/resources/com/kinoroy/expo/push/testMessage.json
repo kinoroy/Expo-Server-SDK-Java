@@ -5,6 +5,11 @@
 
   "body": "This is only a test",
 
+  "data": {
+    "title": "Test",
+    "body": "This is only a test"
+  },
+
   "ttl": 86400,
 
   "expiration": 1540145105,

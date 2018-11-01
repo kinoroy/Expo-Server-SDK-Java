@@ -42,7 +42,7 @@ public final class Message {
      * @return A dict of extra data to pass inside of the push notification.
      * The total notification payload must be at most 4096 bytes.
      */
-    public Object getData() {
+    public HashMap<String, Object> getData() {
         return data;
     }
 

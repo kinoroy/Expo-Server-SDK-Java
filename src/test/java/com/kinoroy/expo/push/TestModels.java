@@ -11,6 +11,8 @@ import java.net.URL;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashMap;
+
 import static com.kinoroy.expo.push.Util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,10 +26,15 @@ public class TestModels {
                 .registerTypeAdapter(Instant.class, new InstantAdapter())
                 .registerTypeAdapter(Duration.class, new DurationAdapter()).create();
 
+        HashMap<String, Object> dataMap = new HashMap<>();
+        dataMap.put("title", "Test");
+        dataMap.put("body", "This is only a test");
+
         Message message = new Message.Builder()
                 .to("ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]")
                 .title("Test")
                 .body("This is only a test")
+                .data(dataMap)
                 .badge(11)
                 .channelId("abc")
                 .priority(Priority.DEFAULT)
@@ -42,6 +49,7 @@ public class TestModels {
         assertEquals(message.getTo(), loadedMessage.getTo());
         assertEquals(message.getTitle(), loadedMessage.getTitle());
         assertEquals(message.getBody(), loadedMessage.getBody());
+        assertEquals(message.getData().get("title"), loadedMessage.getData().get("title"));
         assertEquals(message.getBadge(), loadedMessage.getBadge());
         assertEquals(message.getChannelId(), loadedMessage.getChannelId());
         assertEquals(message.getPriority(), loadedMessage.getPriority());
