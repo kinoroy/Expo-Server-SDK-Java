@@ -88,7 +88,7 @@ public class Main {
         ids.add("xxxxxxx-yyyy-yyyy-yyyy-xyxyxyxyxyxy");
         try {
             PushReceiptResponse response = ExpoPushClient.getPushReciepts(ids);
-            List<PushReceipt> receipts = response.getReceipts();
+            Map<String, PushReceipt> receipts = response.getReceipts();
             for (String id : ids) {
                 PushReceipt rec = receipts.get(id);
                 if (rec != null) {
