@@ -41,6 +41,7 @@ public class TestModels {
                 .expiration(Instant.ofEpochSecond(1540145105))
                 .ttl(Duration.ofDays(1))
                 .sound("mySound.wav")
+                .subtitle("This is an iOS subtitle")
                 .build();
 
         String loadedJson = readFromFile("testMessage.json");
@@ -56,6 +57,7 @@ public class TestModels {
         assertEquals(message.getExpiration(), loadedMessage.getExpiration());
         assertEquals(message.getTtl(), loadedMessage.getTtl());
         assertEquals(message.getSound(), loadedMessage.getSound());
+        assertEquals(message.getSubtitle(), loadedMessage.getSubtitle());
 
 
     }

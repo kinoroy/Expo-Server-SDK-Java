@@ -20,5 +20,7 @@
 
   "badge": 11,
 
-  "channelId": "abc"
+  "channelId": "abc",
+
+  "subtitle": "This is an iOS subtitle"
 }
