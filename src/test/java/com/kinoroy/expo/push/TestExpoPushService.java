@@ -3,22 +3,16 @@ package com.kinoroy.expo.push;
 import com.google.gson.GsonBuilder;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import retrofit2.Response;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.net.URL;
-import java.sql.Date;
-import java.time.Duration;
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import static com.kinoroy.expo.push.Util.*;
+
+import static com.kinoroy.expo.push.TestUtil.*;
 
 public class TestExpoPushService {
 
@@ -87,6 +81,9 @@ public class TestExpoPushService {
         assertNull(t2.getDetails());
         assertEquals(t2.getId(), "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
 
+        assertEquals(1, Util.extractNotRegisteredTokens(res).size());
+        assertEquals("ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]", Util.extractNotRegisteredTokens(res).get(0));
+
     }
 
     @Test
@@ -135,7 +132,6 @@ public class TestExpoPushService {
         assertNull(r2.getDetails());
 
     }
-
 
     public void tearDown() throws Exception {
         mockServer.shutdown();
