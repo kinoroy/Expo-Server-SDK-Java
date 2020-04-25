@@ -4,16 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.net.URL;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Date;
 import java.util.HashMap;
 
-import static com.kinoroy.expo.push.Util.*;
+import static com.kinoroy.expo.push.TestUtil.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

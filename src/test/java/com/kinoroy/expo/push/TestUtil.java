@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.net.URL;
 
-public class Util {
+public class TestUtil {
 
     public static String readFromFile(String fileName) throws Exception {
 
