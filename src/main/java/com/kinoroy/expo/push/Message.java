@@ -29,6 +29,8 @@ public final class Message {
 
     private String channelId;
 
+    private String subtitle;
+
     private Message() {}
 
     /**
@@ -111,6 +113,13 @@ public final class Message {
     public String getChannelId() {
         return channelId;
     }
+    /**
+     * @return The subtitle to display in the notification below the title.
+     * This currently only affects iOS.
+     */
+    public String getSubtitle() {
+        return subtitle;
+    }
 
     /**
      * A class to help contruct messages
@@ -136,6 +145,8 @@ public final class Message {
         private Integer badge;
 
         private String channelId;
+
+        private String subtitle;
 
         /**
          * @param to A token of the form ExponentPushToken[xxxxxxx]
@@ -228,6 +239,15 @@ public final class Message {
             return this;
         }
 
+        /**
+         * The subtitle to display in the notification below the title.
+         * This currently only affects iOS.
+         */
+        public Builder subtitle(String subtitle) {
+            this.subtitle = subtitle;
+            return this;
+        }
+
         public Message build() {
             Message message = new Message();
 
@@ -250,6 +270,7 @@ public final class Message {
             }
             message.badge = badge;
             message.channelId = channelId;
+            message.subtitle = subtitle;
 
             return message;
         }
